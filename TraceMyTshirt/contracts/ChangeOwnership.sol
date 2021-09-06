@@ -5,14 +5,14 @@ contract ProductManagement{
     struct Part{
         address manufacturer;
         string serial_number;
-        string part_type;
+        string production_type;
         string creation_date;
     }
 
     struct Product{
         address manufacturer;
         string serial_number;
-        string product_type;
+        string production_type;
         string creation_date;
         bytes32[] parts;
     }
