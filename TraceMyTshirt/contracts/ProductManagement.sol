@@ -1,4 +1,4 @@
-pragma solidity >=0.4.21 <0.6.0;
+pragma solidity >=0.4.21 <0.9.0;
 
 contract ProductManagement {
     struct Part{
@@ -22,9 +22,9 @@ contract ProductManagement {
     constructor() public {
     }
 
-    function concatenateInfoAndHash(address a1, string memory s1, string memory s2, string memory s3) private returns (bytes32){
+    function concatenateInfoAndHash(address a1, string memory s1, string memory s2, string memory s3) public pure returns (bytes32){
         //First, get all values as bytes
-        bytes20 b_a1 = bytes20(a1);
+        /*bytes20 b_a1 = bytes20(a1);
         bytes memory b_s1 = bytes(s1);
         bytes memory b_s2 = bytes(s2);
         bytes memory b_s3 = bytes(s3);
@@ -49,6 +49,9 @@ contract ProductManagement {
 
         //Hash the result and return
         return keccak256(b_full);
+    */
+    return keccak256(abi.encodePacked(a1,s1,s2,s3));
+    
     }
 
     function buildPart(string memory serial_number, string memory part_type, string memory creation_date) public returns (bytes32){
@@ -79,7 +82,7 @@ contract ProductManagement {
         return product_hash;
     }
 
-    function getParts(bytes32 product_hash) public returns (bytes32[6] memory){
+    function getParts(bytes32 product_hash) public view returns (bytes32[6] memory){
         //The automatic getter does not return arrays, so lets create a function for that
         require(products[product_hash].manufacturer != address(0), "Product inexistent");
         return products[product_hash].parts;
