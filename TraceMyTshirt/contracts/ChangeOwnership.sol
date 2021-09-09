@@ -1,27 +1,5 @@
 pragma solidity >=0.4.21 <0.6.0;
-
-//Add ProductManagement ABI to allow calls
-contract ProductManagement{
-    struct Part{
-        address manufacturer;
-        string serial_number;
-        string production_type;
-        string creation_date;
-    }
-
-    struct Product{
-        address manufacturer;
-        string serial_number;
-        string production_type;
-        string creation_date;
-        bytes32[] parts;
-    }
-
-    mapping(bytes32 => Part) public parts;
-    mapping(bytes32 => Product) public products;
-
-    function getParts(bytes32 product_hash) public returns (bytes32[6] memory) {}
-}
+import "./ProductManagement.sol";
 
 contract ChangeOwnership {
 
